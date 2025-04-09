@@ -47,7 +47,6 @@ namespace RelampagoSitios.Controllers
 
                 ViewBag.Mensaje = "PDF subido y contenido guardado en la base de datos.";
             }
-
             return View();
         }
     }

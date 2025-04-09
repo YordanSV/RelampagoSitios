@@ -12,5 +12,4 @@ namespace RelampagoSitios.Models
         public string Contenido { get; set; }
         public DateTime FechaSubida { get; set; }
     }
-
 }
