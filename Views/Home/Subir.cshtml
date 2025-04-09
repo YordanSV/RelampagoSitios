@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Subir";
+}
+
+@{
+    ViewBag.Title = "Subir PDF";
+}
+
+<h2>Subir PDF</h2>
+
+@using (Html.BeginForm("Subir", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="archivoPdf" accept="application/pdf" />
+    <br />
+    <br />
+    <input type="submit" value="Subir PDF" />
+}
+
+<p style="color:green">@ViewBag.Mensaje</p>
+
