@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+    Layout = null;
+
+    string nombreUsuario = Session["Nombre"] as string;
+    bool usuarioLogueado = !string.IsNullOrEmpty(nombreUsuario);
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fdfdfb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding-top: 60px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #2c5a73;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .header .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header .user-actions span {
+            font-weight: bold;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid white;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .header a:hover {
+            background-color: white;
+            color: #2c5a73;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-outline {
+            padding: 12px 30px;
+            border-radius: 16px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #1f4ed8;
+            color: white;
+            border: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #1f4ed8;
+            color: #1f4ed8;
+        }
+
+        .wave-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 40%;
+            background: #a9c8ef;
+            clip-path: ellipse(50% 70% at 0% 50%);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <h2>Busca Palabras</h2>
+        <div class="user-actions">
+            @if (usuarioLogueado)
+            {
+                <span>@nombreUsuario</span>
+                <a href="@Url.Action("Logout", "Home")">Cerrar sesión</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Home")">Iniciar sesión</a>
+            }
+        </div>
+    </div>
+
+    <div class="wave-bg"></div>
+
+    <div class="container">
+        <h1>Busca Palabras</h1>
+        <p>Te ayudamos a conseguir cualquier palabra dentro de un PDF</p>
+        <div class="buttons">
+            @if (usuarioLogueado)
+            {
+                <a href="@Url.Action("BuscaPalabras", "Home")" class="btn-primary">Buscar palabras</a>
+                <a href="@Url.Action("Subir", "Home")" class="btn-outline">Subir PDF</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Home")" class="btn-primary">Buscar palabras</a>
+                <a href="@Url.Action("Login", "Home")" class="btn-outline">Subir PDF</a>
+            }
+        </div>
+    </div>
+</body>
+</html>
